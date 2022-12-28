@@ -21,5 +21,13 @@ class Todolist {
         res.write(this.getJsonTodolist());
         res.end();
     }
+    createTodo(req, res) {
+        req.addListener("data", (data) => {
+            const body = JSON.parse(data.toString());
+            this.todolist.push(body.todo);
+            res.write(this.getJsonTodolist());
+            res.end();
+        });
+    }
 }
 exports.Todolist = Todolist;

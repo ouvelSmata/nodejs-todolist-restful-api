@@ -1,4 +1,4 @@
-import http from "http";
+import http, { IncomingMessage, ServerResponse } from "http";
 
 export class Todolist {
   todolist: string[] = ["Programmer", "Zaman", "Now"];
@@ -16,8 +16,19 @@ export class Todolist {
     });
   }
 
-  getTodo(req: http.IncomingMessage, res: http.ServerResponse): void {
+  getTodo(req: IncomingMessage, res: ServerResponse): void {
     res.write(this.getJsonTodolist());
     res.end();
+  }
+
+  createTodo(req: IncomingMessage, res: ServerResponse): void {
+    req.addListener("data", (data: any): void => {
+      const body = JSON.parse(data.toString());
+
+      this.todolist.push(body.todo);
+
+      res.write(this.getJsonTodolist());
+      res.end();
+    });
   }
 }

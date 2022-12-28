@@ -8,6 +8,8 @@ const server = http.createServer((req, res): void => {
 
   if (req.method === "GET") {
     todolist.getTodo(req, res);
+  } else if (req.method === "POST") {
+    todolist.createTodo(req, res);
   }
 });
 
