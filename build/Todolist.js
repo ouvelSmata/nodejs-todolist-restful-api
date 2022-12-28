@@ -29,5 +29,15 @@ class Todolist {
             res.end();
         });
     }
+    updateTodo(req, res) {
+        req.addListener("data", (data) => {
+            const body = JSON.parse(data.toString());
+            if (this.todolist[body.id]) {
+                this.todolist[body.id] = body.todo;
+            }
+            res.write(this.getJsonTodolist());
+            res.end();
+        });
+    }
 }
 exports.Todolist = Todolist;

@@ -31,4 +31,17 @@ export class Todolist {
       res.end();
     });
   }
+
+  updateTodo(req: IncomingMessage, res: ServerResponse): void {
+    req.addListener("data", (data: any): void => {
+      const body = JSON.parse(data.toString());
+
+      if (this.todolist[body.id]) {
+        this.todolist[body.id] = body.todo;
+      }
+
+      res.write(this.getJsonTodolist());
+      res.end();
+    });
+  }
 }

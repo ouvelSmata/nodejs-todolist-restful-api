@@ -14,5 +14,8 @@ const server = http_1.default.createServer((req, res) => {
     else if (req.method === "POST") {
         todolist.createTodo(req, res);
     }
+    else if (req.method === "PUT") {
+        todolist.updateTodo(req, res);
+    }
 });
 server.listen(3000);

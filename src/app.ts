@@ -10,6 +10,8 @@ const server = http.createServer((req, res): void => {
     todolist.getTodo(req, res);
   } else if (req.method === "POST") {
     todolist.createTodo(req, res);
+  } else if (req.method === "PUT") {
+    todolist.updateTodo(req, res);
   }
 });
 
