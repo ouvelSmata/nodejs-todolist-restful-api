@@ -17,5 +17,8 @@ const server = http_1.default.createServer((req, res) => {
     else if (req.method === "PUT") {
         todolist.updateTodo(req, res);
     }
+    else if (req.method === "DELETE") {
+        todolist.deleteTodo(req, res);
+    }
 });
 server.listen(3000);

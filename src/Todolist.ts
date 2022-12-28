@@ -44,4 +44,17 @@ export class Todolist {
       res.end();
     });
   }
+
+  deleteTodo(req: IncomingMessage, res: ServerResponse): void {
+    req.addListener("data", (data: any): void => {
+      const body = JSON.parse(data.toString());
+
+      if (this.todolist[body.id]) {
+        this.todolist.splice(body.id, 1);
+      }
+
+      res.write(this.getJsonTodolist());
+      res.end();
+    });
+  }
 }
